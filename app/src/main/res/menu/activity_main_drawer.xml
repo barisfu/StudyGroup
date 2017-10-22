@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!--What goes in the sidebar-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_button"
+
+            android:title="@string/home" />
+        <item
+            android:id="@+id/search_button"
+            android:title="@string/search" />
+        <item
+            android:id="@+id/points_button"
+            android:title="@string/points" />
+        <item
+            android:id="@+id/event_button"
+            android:title="@string/events" />
+        <item
+            android:id="@+id/group_button"
+            android:title="Group Page"/>
+
+    </group>
+
+
+
+</menu>

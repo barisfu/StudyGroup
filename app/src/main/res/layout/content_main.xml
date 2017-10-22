@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="edu.fsu.cs.mobile.studygroup.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+   <!--what goes in sidebar-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_frame"
+        android:tag="main_frag"
+        android:layout_weight="1"
+        android:name="edu.fsu.cs.mobile.studygroup.mainFragment"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/search_frame"
+        android:tag="search_frag"
+        android:layout_weight="1"
+        android:name="edu.fsu.cs.mobile.studygroup.searchFragment"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/points_frame"
+        android:tag="points_frag"
+        android:layout_weight="1"
+        android:name="edu.fsu.cs.mobile.studygroup.pointsFragment"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/event_frame"
+        android:tag="event_frag"
+        android:layout_weight="1"
+        android:name="edu.fsu.cs.mobile.studygroup.eventFragment"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/group_frame"
+        android:tag="group_tag"
+        android:name="edu.fsu.cs.mobile.studygroup.groupPageFragment"
+        />
+
+
+</RelativeLayout>
