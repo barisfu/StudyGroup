@@ -132,6 +132,11 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.main_frame, f1);
             fragmentTransaction.commit();
 
+        } else if (id== R.id.group_button){
+            groupPageFragment f1 = new groupPageFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.main_frame, f1);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
