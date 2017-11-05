@@ -14,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,7 +48,13 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+        //get bundle username from login and set as the display
+        Bundle b = getIntent().getExtras();
+        mainFragment frag = new mainFragment();
+        frag.setArguments(b);
+        //TextView username= (TextView) findViewById(R.id.user_display);
 
+       // username.setText(b.getCharSequence("username"));
 
 
 
@@ -105,13 +114,13 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
 
-        } else if (id == R.id.points_button) {
+        } /*else if (id == R.id.points_button) {
             pointsFragment f1= new pointsFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_frame, f1);
             fragmentTransaction.commit();
 
-        } else if (id == R.id.event_button) {
+        }*/ else if (id == R.id.event_button) {
             eventFragment f1= new eventFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_frame, f1);

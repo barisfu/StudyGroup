@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 
@@ -38,10 +39,17 @@ public class mainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+       // TextView username= (TextView) getView().findViewById(R.id.user_display);
+       // String txt= getArguments().getString("username");
+      //  username.setText(txt);
+
         View view = inflater.inflate(R.layout.main_frag, container, false);
 
 
         return view;
+
+
     }
 
 
