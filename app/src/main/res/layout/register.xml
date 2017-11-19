@@ -22,7 +22,7 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:text="@string/first_name"
+        android:hint="@string/first_name"
         android:gravity="center"/>
 
     <!-- Last name id=@+id/lname-->
