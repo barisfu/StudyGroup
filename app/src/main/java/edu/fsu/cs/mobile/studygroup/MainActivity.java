@@ -15,6 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
 
@@ -22,6 +26,10 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FragmentManager m;
     FragmentTransaction tran;
+    private FirebaseUser user;
+    private FirebaseAuth auth;
+    private String temp;
+    TextView username;
 
 
     //sets mainFrag as the default when app starts up - will edit later to
@@ -44,17 +52,11 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
-        //get bundle username from login and set as the display
-        Bundle b = getIntent().getExtras();
-        mainFragment frag = new mainFragment();
-        frag.setArguments(b);
-        //TextView username= (TextView) findViewById(R.id.user_display);
-
-       // username.setText(b.getCharSequence("username"));
 
 
 
@@ -67,6 +69,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
 
     @Override

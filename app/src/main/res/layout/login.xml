@@ -17,7 +17,7 @@
         android:textStyle="bold"
         android:id="@+id/welcome"
        />
-<!--Username editext id = @+id/username-->
+<!--Username editext id = @+id/emailLog-->
 
     <EditText
         android:layout_width="250sp"
@@ -25,8 +25,8 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/welcome"
         android:layout_marginTop="100dp"
-        android:id="@+id/username"
-        android:hint="@string/user_name"
+        android:id="@+id/emailLog"
+        android:hint="@string/e_mail"
         android:gravity="center"
 
         />
@@ -35,7 +35,7 @@
         android:layout_width="250sp"
         android:layout_height="40sp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/username"
+        android:layout_below="@id/emailLog"
         android:layout_marginTop="20dp"
         android:id="@+id/password"
         android:hint="@string/pass_word"

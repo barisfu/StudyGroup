@@ -1,12 +1,19 @@
 package edu.fsu.cs.mobile.studygroup;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,34 +26,60 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class loginActivity extends AppCompatActivity {
-    EditText username;
-    private DatabaseReference mDatabase;
+    private EditText email;
+    private EditText password;
+    private FirebaseAuth auth;
+    private String email1;
+    private String pass;
+    private Intent intent;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        auth= FirebaseAuth.getInstance();
+        email= (EditText) findViewById(R.id.emailLog);
+        password = (EditText) findViewById(R.id.password);
+
 
     }
 
 
     //clicking login opens mainActivity
     public void loginToMain(View view){
-        //puts username in bundle to send to main
-        username= (EditText) findViewById(R.id.username);
-        Bundle b = new Bundle();
-        b.putString("username", username.getText().toString());
 
-        //opens main
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtras(b);
-        startActivity(intent);
+
+
+        email1=email.getText().toString().trim();
+        pass= password.getText().toString().trim();
+
+        auth.signInWithEmailAndPassword(email1, pass)
+                .addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                //Log.d("TAG", "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                                // If sign in fails, display a message to the user. If sign in succeeds
+                                // the auth state listener will be notified and logic to handle the
+                                // signed in user can be handled in the listener.
+                                if (!task.isSuccessful()) {
+                                    Toast.makeText(loginActivity.this, "Failed",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+
+
+                                    intent = new Intent(loginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+
     }
 
-    public void registerPage(View view){
+                    public void registerPage(View view) {
 
-        Intent intent= new Intent(this, registerActivity.class);
-        startActivity(intent);
-    }
+                        intent = new Intent(loginActivity.this, registerActivity.class);
+                        startActivity(intent);
+                    }
 }

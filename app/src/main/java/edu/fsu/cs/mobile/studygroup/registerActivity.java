@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import android.widget.EditText;
@@ -14,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import android.content.Intent;
+import com.google.firebase.auth.FirebaseAuthException;
 
 import android.widget.Toast;
 
@@ -34,13 +37,17 @@ public class registerActivity  extends AppCompatActivity{
     private EditText username;
     private EditText password;
     private FirebaseAuth auth;
-    private FirebaseAnalytics mfba;
+    private String email1;
+    private String pass;
+    private Intent intent;
+    private FirebaseAnalytics fba;
+    private FirebaseUser user;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        mfba = FirebaseAnalytics.getInstance(this);
+        fba = FirebaseAnalytics.getInstance(this);
         auth= FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
 
@@ -54,33 +61,32 @@ public class registerActivity  extends AppCompatActivity{
 
 
     //clicking on register opens up mainActivity
-    public void regToMain(View view){
+    public void regToMain(View view) {
         //create child in root
         //assign value to child
-        if(TextUtils.isEmpty(email.getText().toString())){
+        if (TextUtils.isEmpty(email.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Enter email address", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(fname.getText().toString())){
+        if (TextUtils.isEmpty(fname.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Enter first name", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(lname.getText().toString())){
+        if (TextUtils.isEmpty(lname.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Enter last name", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(username.getText().toString())){
+        if (TextUtils.isEmpty(username.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Enter username", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(password.getText().toString())){
+        if (TextUtils.isEmpty(password.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Enter password", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String email1 =email.getText().toString().trim();
-        String pass = password.getText().toString().trim();
-
+        email1 = email.getText().toString().trim();
+        pass = password.getText().toString().trim();
 
 
         //Some reason this is failing to add the user to Firebase ????
@@ -94,11 +100,32 @@ public class registerActivity  extends AppCompatActivity{
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                           Toast.makeText(registerActivity.this, "Failed",
-                                   Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(registerActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(registerActivity.this, "Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+
+
+                            user = auth.getCurrentUser();
+
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(username.getText().toString())
+                                    .build();
+
+                            //update display name aka username
+                            user.updateProfile(profileUpdates);
+
+
+
+                            /*
+                            fba.setUserProperty("Username", username.getText().toString());
+                            fba.setUserProperty("Fname", fname.getText().toString());
+                            fba.setUserProperty("Lname", lname.getText().toString());
+                            fba.setUserProperty("Points", "0");*/
+
+
+                             intent = new Intent(registerActivity.this, MainActivity.class);
+                            startActivity(intent);
                         }
 
 
@@ -112,10 +139,10 @@ public class registerActivity  extends AppCompatActivity{
 
 
 
-            //add these 2 lines once I figure out how to add the user
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
+
+
 
     }
 
 }
+
