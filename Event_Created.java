@@ -14,19 +14,19 @@ public class Event_Created extends AppCompatActivity {
 
             Intent intent1 = getIntent();
         //if(getIntent().hasExtra("com.example.khawly.myapplication.quicklauncher.event")){
-            TextView en1 = (TextView) findViewById(R.id.EN);
+            TextView en1 = findViewById(R.id.EN);
             String text = intent1.getExtras().getString("event");
             en1.setText(text);
      //   }
 
     //    if(getIntent().hasExtra("com.example.khawly.myapplication.quicklauncher.date")){
-            TextView dt1 = (TextView) findViewById(R.id.DT);
+            TextView dt1 = findViewById(R.id.DT);
             String text1 = intent1.getExtras().getString("date");
             dt1.setText(text1);
     //    }
 
     //    if(getIntent().hasExtra("com.example.khawly.myapplication.quicklauncher.location")){
-            TextView loc1 = (TextView) findViewById(R.id.LOC);
+            TextView loc1 = findViewById(R.id.LOC);
             String text2 = intent1.getExtras().getString("location");
             loc1.setText(text2);
      //   }

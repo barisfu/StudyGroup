@@ -7,8 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class Create_Event extends AppCompatActivity {
+
+    //DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,24 +24,34 @@ public class Create_Event extends AppCompatActivity {
         //toolbar = (Toolbar) findViewById(id.toolbar);
         //  setSupportActionBar(toolbar);
 
-        Button button2 = (Button) findViewById(R.id.button2);
+        Button button2 = findViewById(R.id.button2);
+
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText Eventname = (EditText) findViewById(R.id.Eventname);
-                EditText DateandTime = (EditText) findViewById(R.id.DateandTime);
-                EditText Location = (EditText) findViewById(R.id.Location);
+                EditText Eventname = findViewById(R.id.Eventname);
+                EditText DateandTime = findViewById(R.id.DateandTime);
+                EditText Location = findViewById(R.id.Location);
 
                 String en = Eventname.getText().toString();
                 String dt = DateandTime.getText().toString();
                 String loc = Location.getText().toString();
+
+                DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+
+                DatabaseReference FBEventname = database.child("Event Name");
+                DatabaseReference FBDateandTime = database.child("Date and Time");
+                DatabaseReference FBLocation = database.child("Location");
+
+                FBEventname.setValue(en);
+                FBDateandTime.setValue(dt);
+                FBLocation.setValue(loc);
 
               Intent intent1 = new Intent(getApplicationContext(), Event_Created.class);
               intent1.putExtra("event", en);
               intent1.putExtra("date", dt);
               intent1.putExtra("location", loc);
               startActivity(intent1);
-
             }
         });
     }
