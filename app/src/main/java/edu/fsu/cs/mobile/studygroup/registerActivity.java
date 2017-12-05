@@ -16,11 +16,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import android.content.Intent;
-import com.google.firebase.auth.FirebaseAuthException;
 
+import java.util.Map;
 import android.widget.Toast;
 
 import android.support.annotation.NonNull;
+
+import java.util.HashMap;
 
 
 /**
@@ -42,6 +44,8 @@ public class registerActivity  extends AppCompatActivity{
     private Intent intent;
     private FirebaseAnalytics fba;
     private FirebaseUser user;
+    private String UID;
+    private int points;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +55,13 @@ public class registerActivity  extends AppCompatActivity{
         auth= FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
 
+
         fname = (EditText) findViewById(R.id.fname);
         lname = (EditText) findViewById(R.id.lname);
         email= (EditText) findViewById(R.id.email);
         username = (EditText) findViewById(R.id.username_reg);
         password = (EditText) findViewById(R.id.password_reg);
+        points=0;
     }
 
 
@@ -106,7 +112,7 @@ public class registerActivity  extends AppCompatActivity{
 
 
                             user = auth.getCurrentUser();
-
+                            UID = user.getUid();
 
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(username.getText().toString())
@@ -116,14 +122,14 @@ public class registerActivity  extends AppCompatActivity{
                             user.updateProfile(profileUpdates);
 
 
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("email", email.getText().toString());
+                            map.put("username", username.getText().toString());
+                            map.put("fname", fname.getText().toString());
+                            map.put("lname", lname.getText().toString());
+                            map.put("points", 10);
 
-                            /*
-                            fba.setUserProperty("Username", username.getText().toString());
-                            fba.setUserProperty("Fname", fname.getText().toString());
-                            fba.setUserProperty("Lname", lname.getText().toString());
-                            fba.setUserProperty("Points", "0");*/
-
-
+                            mDatabase.child("users").child(UID).setValue(map);
                              intent = new Intent(registerActivity.this, MainActivity.class);
                             startActivity(intent);
                         }
@@ -131,6 +137,8 @@ public class registerActivity  extends AppCompatActivity{
 
                     }
                 });
+
+
 
 
 

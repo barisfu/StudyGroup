@@ -30,7 +30,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/points_display"
-        android:text="200"
         android:textSize="35sp"
         android:layout_below="@id/user_display"
         android:layout_centerHorizontal="true"
