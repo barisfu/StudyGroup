@@ -25,6 +25,10 @@ public class Event_Created extends AppCompatActivity {
             dt1.setText(text1);
     //    }
 
+            TextView tm1 = findViewById(R.id.TM);
+            String text3 = intent1.getExtras().getString("time");
+            tm1.setText(text3);
+
     //    if(getIntent().hasExtra("com.example.khawly.myapplication.quicklauncher.location")){
             TextView loc1 = findViewById(R.id.LOC);
             String text2 = intent1.getExtras().getString("location");

@@ -30,26 +30,31 @@ public class Create_Event extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText Eventname = findViewById(R.id.Eventname);
-                EditText DateandTime = findViewById(R.id.DateandTime);
+                EditText Date = findViewById(R.id.Date);
+                EditText Time = findViewById(R.id.Time);
                 EditText Location = findViewById(R.id.Location);
 
                 String en = Eventname.getText().toString();
-                String dt = DateandTime.getText().toString();
+                String dt = Date.getText().toString();
+                String tm = Time.getText().toString();
                 String loc = Location.getText().toString();
 
                 DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
                 DatabaseReference FBEventname = database.child("Event Name");
-                DatabaseReference FBDateandTime = database.child("Date and Time");
+                DatabaseReference FBDate = database.child("Date");
+                DatabaseReference FBTime = database.child("Time");
                 DatabaseReference FBLocation = database.child("Location");
 
                 FBEventname.setValue(en);
-                FBDateandTime.setValue(dt);
+                FBDate.setValue(dt);
+                FBTime.setValue(tm);
                 FBLocation.setValue(loc);
 
               Intent intent1 = new Intent(getApplicationContext(), Event_Created.class);
               intent1.putExtra("event", en);
               intent1.putExtra("date", dt);
+              intent1.putExtra("time", tm);
               intent1.putExtra("location", loc);
               startActivity(intent1);
             }
